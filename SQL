@@ -1,13 +1,12 @@
-カードテーブル
-CREATE TABLE card
-(
- card_id integer(5),
-get_staff_id integer(4),
-send_staff_id integer(4),
-primary key(card_id)
-)
+#カードテーブル
+CREATE TABLE card(
+  card_id integer(5),
+  get_staff_id integer(4),
+  send_staff_id integer(4),
+  primary key(card_id)
+);
 
-カード詳細テーブル
+#カード詳細テーブル
 CREATE TABLE card_detail (
   card_id  integer(5) ,
   point integer(1),
@@ -15,46 +14,44 @@ CREATE TABLE card_detail (
   thanks_word varchar(200),
   helped_date date,
   category_id integer(2),
-  post_date timestamp DEFAULT CURRENT_TIMESTAMP() ,
+  post_date timestamp DEFAULT CURRENT_TIMESTAMP(),
   primary key(card_id),
   FOREIGN KEY (card_id)
   REFERENCES card(card_id)
-)
+);
 
-スタッフテーブル
-CREATE TABLE staff
-(
- staff_id integer(4),
- department_id integer(2),
- staff_name varchar(20),
- password varchar(8),
- authority integer(1),
- primary key(staff_id),
- FOREIGN KEY (staff_id)
- REFERENCES card(get_staff_id),
- FOREIGN KEY (staff_id)
- REFERENCES card(send_staff_id)
-)
+#スタッフテーブル
+CREATE TABLE staff(
+  staff_id integer(4),
+  department_id integer(2),
+  staff_name varchar(20),
+  password varchar(8),
+  authority integer(1),
+  primary key(staff_id),
+  FOREIGN KEY (staff_id)
+  REFERENCES card(get_staff_id),
+  FOREIGN KEY (staff_id)
+  REFERENCES card(send_staff_id)
+);
 
-カテゴリID
+#カテゴリID
 CREATE TABLE catefory
 (
- category_id integer(2),
- catefory_name varchar(20),
- primary key(category_id),
- FOREIGN KEY (category_id)
- REFERENCES card_detail(category_id)
-)
+  category_id integer(2),
+  catefory_name varchar(20),
+  primary key(category_id),
+  FOREIGN KEY (category_id)
+  REFERENCES card_detail(category_id)
+);
 
-部署テーブル
-CREATE TABLE departmant
-(
- department_id integer(2),
- department_name varchar(20),
- primary key(department_id),
- FOREIGN KEY (department_id)
- REFERENCES staff(department_id)
-)
+#部署テーブル
+CREATE TABLE departmant(
+  department_id integer(2),
+  department_name varchar(20),
+  primary key(department_id),
+  FOREIGN KEY (department_id)
+  REFERENCES staff(department_id)
+);
 
-テーブル
-drop table card , card_detail , catefory , departmant , staff
+#テーブル削除
+drop table card , card_detail , catefory , departmant , staff;
